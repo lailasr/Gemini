@@ -13,8 +13,8 @@ using Lextm.SharpSnmpLib.Mib;
 using Automatak.DNP3.Adapter;
 using Automatak.DNP3.Interface;
 
-using Gemini.Utility.DNP3;
-using Gemini.Utility.SNMP;
+using Gemini.ServiceManager.DNP3;
+using Gemini.TargetManager;
 
 namespace Gemini
 {
@@ -24,11 +24,11 @@ namespace Gemini
         {
             Core.Start();
 
-            SNMPTarget retAbelSantana = new SNMPTarget("10.7.5.150");
+            SnmpTarget retAbelSantana = new SnmpTarget("10.7.5.150");
             retAbelSantana.InsertObject("batteryTemperaturesValue", ".1.3.6.1.4.1.12148.10.10.7.5.0");
             SnmpV2Packet result = retAbelSantana.GetUpdate();
             IPEndpoint myEndPoint = new IPEndpoint("0.0.0.0", 20500);
-            RTU rtu = new RTU("Teste DNP3", myEndPoint, 2, 1);
+            Rtu rtu = new Rtu("Teste DNP3", myEndPoint, 2, 1);
             ChangeSet changeSet;
             int currentValue;
 

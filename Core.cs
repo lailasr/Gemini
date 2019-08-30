@@ -27,7 +27,7 @@ namespace Gemini
                 Console.WriteLine("Parâmetros iniciados com sucesso");
             }
 
-            DNP3Manager = DNP3ManagerFactory.CreateManager(1, new PrintingLogAdapter());
+            DNP3Manager = DNP3ManagerFactory.CreateManager(4, new PrintingLogAdapter());
         }
 
         public static AgentParameters GetAgentParameters()

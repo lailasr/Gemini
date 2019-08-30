@@ -8,16 +8,16 @@ using System.Net;
 
 using SnmpSharpNet;
 
-namespace Gemini.Utility.SNMP
+namespace Gemini.TargetManager
 {
-    public class SNMPTarget
+    public class SnmpTarget
     {
         public IPAddress Address { get; private set; }
         public UdpTarget Target { get; private set; }
         public Pdu Pdu { get; set; }
         public Dictionary<string,string> Database { get; private set; }
         
-        public SNMPTarget(string clientAddress)
+        public SnmpTarget(string clientAddress)
         {
             Address = IPAddress.Parse(clientAddress);
             Target = new UdpTarget(Address, 161, 2000, 1);
@@ -45,7 +45,7 @@ namespace Gemini.Utility.SNMP
 
         public SnmpV2Packet GetUpdate()
         {
-                return (SnmpV2Packet)Target.Request(Pdu, Core.SNMPParameters);
+            return (SnmpV2Packet)Target.Request(Pdu, Core.SNMPParameters);
         }
     }
 }

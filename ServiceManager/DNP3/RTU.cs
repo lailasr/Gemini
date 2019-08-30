@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Automatak.DNP3.Adapter;
 using Automatak.DNP3.Interface;
 
-namespace Gemini.Utility.DNP3
+namespace Gemini.ServiceManager.DNP3
 {
-    public class RTU
+    public class Rtu
     {
         public OutstationStackConfig Config { get; private set; }
         public IOutstation Outstation { get; private set; }
         public IChannel Channel { get; private set; }
-        public RTU(string name, IPEndpoint hostAddres, ushort localDNP3Addres, ushort remoteDNP3Address)
+        public Rtu(string name, IPEndpoint hostAddres, ushort localDNP3Addres, ushort remoteDNP3Address)
         {
             //Considerando uma RTU por Canal
             Channel = Core.DNP3Manager.AddTCPServer(name, LogLevels.ALL,ServerAcceptMode.CloseExisting, hostAddres.address, hostAddres.port, ChannelListener.Print());

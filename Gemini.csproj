@@ -102,13 +102,18 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="Utility\DNP3\RTU.cs" />
-    <Compile Include="Utility\SNMP\SNMPTarget.cs" />
+    <Compile Include="ServiceManager\DNP3\Rtu.cs" />
+    <Compile Include="ServiceManager\GeminiServices.cs" />
+    <Compile Include="ServiceManager\IPoint.cs" />
+    <Compile Include="ServiceManager\IService.cs" />
+    <Compile Include="TargetManager\SnmpTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utility\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
