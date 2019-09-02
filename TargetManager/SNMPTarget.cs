@@ -8,16 +8,16 @@ using System.Net;
 
 using SnmpSharpNet;
 
-namespace Gemini.TargetManager
+namespace Gemini.Utility.SNMP
 {
-    public class SnmpTarget
+    public class SNMPTarget
     {
         public IPAddress Address { get; private set; }
         public UdpTarget Target { get; private set; }
         public Pdu Pdu { get; set; }
         public Dictionary<string,string> Database { get; private set; }
         
-        public SnmpTarget(string clientAddress)
+        public SNMPTarget(string clientAddress)
         {
             Address = IPAddress.Parse(clientAddress);
             Target = new UdpTarget(Address, 161, 2000, 1);
@@ -45,7 +45,35 @@ namespace Gemini.TargetManager
 
         public SnmpV2Packet GetUpdate()
         {
-            return (SnmpV2Packet)Target.Request(Pdu, Core.SNMPParameters);
+                return (SnmpV2Packet)Target.Request(Pdu, Core.SNMPParameters);
         }
+		
+		//Necessario para LoadDatabase(filepath)
+		public class Oid
+		{
+			public string objectId { get; set; }
+		}
+		
+		/* Metodo criado para carregar lista de OIDs a serem monitorados a partir de arquivo .csv
+		Formato do .csv (deve conter o cabeçalho exatamente com estes nomes):
+		  labelName,objectId
+		  batteryTemperaturesValue,.1.3.6.1.4.1.12148.10.10.7.5.0
+		  rectifiersCurrentValue,.1.3.6.1.4.1.12148.10.5.2.5.0
+		  ...
+		Atualizar lista no Pdu chamando UpdateVbList(). 
+		*/
+		public void LoadDatabase(string filepath)
+		{
+			using (var textreader = new StreamReader(filepath))
+			using (var reader = new CsvReader(textreader))
+			{
+				 while (reader.Read())
+				{
+					string labelName = reader.GetField<string>("labelName");
+					Oid oid = reader.GetRecord<Oid>();
+					this.InsertObject(labelName,oid.objectId);
+				}
+			}
+		}
     }
 }
