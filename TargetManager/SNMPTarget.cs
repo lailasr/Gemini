@@ -53,14 +53,14 @@ namespace Gemini.Utility.SNMP
 		{
 			public string objectId { get; set; }
 		}
-		
+
 		/* Metodo criado para carregar lista de OIDs a serem monitorados a partir de arquivo .csv
 		Formato do .csv (deve conter o cabeçalho exatamente com estes nomes):
 		  labelName,objectId
 		  batteryTemperaturesValue,.1.3.6.1.4.1.12148.10.10.7.5.0
 		  rectifiersCurrentValue,.1.3.6.1.4.1.12148.10.5.2.5.0
 		  ...
-		Atualizar lista no Pdu chamando UpdateVbList(). 
+		Chama UpdateVbList() para atualizar o Pdu. 
 		*/
 		public void LoadDatabase(string filepath)
 		{
@@ -74,6 +74,7 @@ namespace Gemini.Utility.SNMP
 					this.InsertObject(labelName,oid.objectId);
 				}
 			}
+			this.UpdateVbList();
 		}
-    }
+	}
 }
