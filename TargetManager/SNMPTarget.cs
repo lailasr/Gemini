@@ -45,7 +45,7 @@ namespace Gemini.Utility.SNMP
 
         public SnmpV2Packet GetUpdate()
         {
-                return (SnmpV2Packet)Target.Request(Pdu, Core.SNMPParameters);
+			return (SnmpV2Packet)Target.Request(Pdu, Core.SNMPParameters);
         }
 		
 		//Necessario para LoadDatabase(filepath)
