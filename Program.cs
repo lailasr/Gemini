@@ -26,7 +26,6 @@ namespace Gemini
 
             SnmpTarget retAbelSantana = new SnmpTarget("10.7.5.150");
             retAbelSantana.InsertObject("batteryTemperaturesValue", ".1.3.6.1.4.1.12148.10.10.7.5.0");
-            SnmpV2Packet result = retAbelSantana.GetUpdate();
             IPEndpoint myEndPoint = new IPEndpoint("0.0.0.0", 20500);
             Rtu rtu = new Rtu("Teste DNP3", myEndPoint, 2, 1);
             ChangeSet changeSet;
@@ -34,6 +33,7 @@ namespace Gemini
 
             while (true)
             {
+                SnmpV2Packet result = retAbelSantana.GetUpdate();
                 if (result != null)
                 {
                     changeSet = new ChangeSet();
